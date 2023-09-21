@@ -2,11 +2,11 @@ import React from 'react';
 
 import { Div, Label, Input } from './Filter.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { getFilter } from 'redux/selectors';
+import { selectFilter } from 'redux/selectors';
 import { changeFilter } from 'redux/filterSlice';
 
 function Filter() {
-  const value = useSelector(getFilter);
+  const value = useSelector(selectFilter);
   const dispatch = useDispatch();
   const onChange = e => {
     const normalizedValue = e.target.value.toLowerCase();

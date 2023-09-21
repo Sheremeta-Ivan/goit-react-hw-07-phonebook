@@ -23,6 +23,10 @@ export const Item = styled.li`
   justify-content: space-between;
   font-size: 20px;
 `;
+export const Text = styled.p`
+  display: inline-block;
+  min-width: 300px;
+`;
 
 export const Button = styled.button`
   display: flex;

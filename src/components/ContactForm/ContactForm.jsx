@@ -5,8 +5,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Form, Label, Button, Input } from './ContactForm.styled';
 import { ReactComponent as AddIcon } from '../icons/add.svg';
 import { useDispatch, useSelector } from 'react-redux';
-import { getVissibleContacts } from 'redux/selectors';
-import { addContact } from 'redux/contactsSlice';
+import { selectContacts } from 'redux/selectors';
+import { addContact } from 'redux/operations';
 
 const nameInputId = nanoid();
 const numberInputId = nanoid();
@@ -15,7 +15,7 @@ const ContactForm = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
-  const contacts = useSelector(getVissibleContacts);
+  const contacts = useSelector(selectContacts);
   const dispatch = useDispatch();
 
   const handleSubmit = event => {
@@ -24,7 +24,7 @@ const ContactForm = () => {
       contact => contact.name.toLowerCase().trim() === name.toLowerCase().trim()
     );
     if (isInContacts) {
-      toast.info(`${name} is already in contacts`, {
+      toast.warn(`${name} is already in contacts`, {
         position: toast.POSITION.TOP_RIGHT,
       });
       return;

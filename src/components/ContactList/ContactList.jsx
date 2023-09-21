@@ -1,30 +1,53 @@
 import React from 'react';
-import { List, Item, Button } from './ContactList.styled';
+import { useEffect } from 'react';
+import { List, Item, Button, Text } from './ContactList.styled';
 import { ReactComponent as DeleteIcon } from '../icons/delete.svg';
 import { useDispatch, useSelector } from 'react-redux';
-import { getVissibleContacts } from 'redux/selectors';
-import { removeContact } from 'redux/contactsSlice';
+import {
+  selectVissibleContacts,
+  selectError,
+  selectLoading,
+} from 'redux/selectors';
+import { fetchContacts, deleteContact } from 'redux/operations';
+import Spinner from 'components/Spinner/Spinner';
 
 const ContactList = () => {
-  const contacts = useSelector(getVissibleContacts);
+  const contacts = useSelector(selectVissibleContacts);
+  const error = useSelector(selectError);
+  const isloading = useSelector(selectLoading);
   const dispatch = useDispatch();
 
-  const handleDelete = () => dispatch(removeContact());
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
+
+  const onDelete = id => dispatch(deleteContact(id));
+
   return (
-    <List>
-      {contacts.map(contact => (
-        <Item key={contact.id}>
-          {contact.name + ' : ' + contact.number}
-          {
-            // delete contact
-            <Button type="button" name="delete" onClick={handleDelete}>
-              <DeleteIcon fill="#000000" width="20" height="20" />
-              Delete
-            </Button>
-          }
-        </Item>
-      ))}
-    </List>
+    <>
+      {isloading && <Spinner />}
+
+      {!contacts.length && !error && !isloading && (
+        <Text>No contacts found</Text>
+      )}
+
+      {error && <Text>{error}</Text>}
+
+      <List>
+        {contacts.map(({ id, name, number }) => (
+          <Item key={id}>
+            {name + ' : ' + number}
+            {
+              // delete contact
+              <Button type="button" name="delete" onClick={() => onDelete(id)}>
+                <DeleteIcon fill="#000000" width="20" height="20" />
+                Delete
+              </Button>
+            }
+          </Item>
+        ))}
+      </List>
+    </>
   );
 };
 

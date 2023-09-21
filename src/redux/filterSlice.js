@@ -1,4 +1,4 @@
-const { createSlice } = require('@reduxjs/toolkit');
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialFilterState = '';
 
@@ -13,5 +13,4 @@ const filterSlice = createSlice({
 });
 
 export const { changeFilter } = filterSlice.actions;
-
 export const filterReducer = filterSlice.reducer;
