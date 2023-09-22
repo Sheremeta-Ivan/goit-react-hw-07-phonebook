@@ -10,7 +10,6 @@ import {
 } from 'redux/selectors';
 import { fetchContacts, deleteContact } from 'redux/operations';
 import Spinner from 'components/Spinner/Spinner';
-import { Container } from 'components/App/App.styled';
 
 const ContactList = () => {
   const contacts = useSelector(selectVissibleContacts);
