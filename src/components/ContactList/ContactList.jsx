@@ -1,6 +1,6 @@
 import React from 'react';
 import { useEffect } from 'react';
-import { List, Item, Button, Text } from './ContactList.styled';
+import { List, Item, Button } from './ContactList.styled';
 import { ReactComponent as DeleteIcon } from '../icons/delete.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -25,15 +25,8 @@ const ContactList = () => {
 
   return (
     <>
-      {isloading && <Spinner />}
-
-      {!contacts.length && !error && !isloading && (
-        <Text>No contacts found</Text>
-      )}
-
-      {error && <Text>{error}</Text>}
-
       <List>
+        {isloading && <Spinner />}
         {contacts.map(({ id, name, number }) => (
           <Item key={id}>
             {name + ' : ' + number}
@@ -46,6 +39,8 @@ const ContactList = () => {
             }
           </Item>
         ))}
+        {!contacts.length && !error && !isloading && <h2>No contacts found</h2>}
+        {error && <h2>{error}</h2>}
       </List>
     </>
   );
