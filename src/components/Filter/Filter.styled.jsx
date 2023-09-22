@@ -12,7 +12,7 @@ export const Label = styled.label`
 
 export const Input = styled.input`
   margin-top: 10px;
-  width: 400px;
+  width: 500px;
   padding: 8px 12px;
   font: inherit;
   border-radius: 4px;

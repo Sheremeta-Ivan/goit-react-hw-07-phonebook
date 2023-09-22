@@ -4,7 +4,7 @@ export const List = styled.ul`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  width: 400px;
+  width: 500px;
   padding: 12px;
   border-radius: 4px;
   background-color: rgba(168, 168, 168, 0.6);
